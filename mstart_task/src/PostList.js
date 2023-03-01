@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./PostList.css";
 
+const getRandomProfileImageUrl = () => {
+  const randomIndex = Math.floor(Math.random() * (10 - 1) + 1);
+  const profileImageUrls = `/user_photos/slika${randomIndex}.png`;
+  return profileImageUrls;
+};
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
@@ -21,7 +27,7 @@ const App = () => {
       );
       const usersWithProfileImages = response.data.map((user, index) => ({
         ...user,
-        profileImageUrl: `/user_photos/slika${index + 1}.png`
+        profileImageUrl: getRandomProfileImageUrl(index)
       }));
       setUsers(usersWithProfileImages);
     };
